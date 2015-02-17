@@ -1,6 +1,7 @@
 'use strict';
 var app = angular.module('com.module.sandbox');
-app.controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeService, Event, Post, User) {
+app.controller('SandboxFakerCtrl', function($scope, $window, CoreService,
+  FakeService, Event, Post, User) {
 
   $scope.faker = [];
 
@@ -8,7 +9,7 @@ app.controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeS
 
   console.log(FakeService);
 
-  $scope.fakeUsers = function () {
+  $scope.fakeUsers = function() {
     $scope.faker = [];
     for (var i = 0; i < $scope.records; i++) {
       var fake = {
@@ -24,12 +25,12 @@ app.controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeS
     CoreService.toastSuccess('Created ' + $scope.records + ' users');
   };
 
-  $scope.fakePosts = function () {
+  $scope.fakePosts = function() {
     $scope.faker = [];
     for (var i = 1; i <= $scope.records; i++) {
       var fake = {
         title: FakeService.faker.lorem.sentence(),
-        body: FakeService.faker.lorem.paragraph(),
+        content: FakeService.faker.lorem.paragraph(),
         image: FakeService.faker.image.imageUrl()
       };
       $scope.faker.push(fake);
@@ -38,15 +39,14 @@ app.controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeS
     CoreService.toastSuccess('Created ' + $scope.records + ' posts');
   };
 
-  $scope.fakeEvents = function () {
+  $scope.fakeEvents = function() {
     $scope.faker = [];
     for (var i = 0; i < $scope.records; i++) {
-      var name = FakeService.faker.name.findName();
       var fake = {
         name: FakeService.faker.lorem.sentence(),
         description: FakeService.faker.lorem.paragraph(),
-        start_time: FakeService.faker.date.future(),
-        end_time: FakeService.faker.date.future()
+        startTime: FakeService.faker.date.future(),
+        endTime: FakeService.faker.date.future()
       };
       $scope.faker.push(fake);
       Event.create(fake);
@@ -56,6 +56,6 @@ app.controller('SandboxFakerCtrl', function ($scope, $window, CoreService, FakeS
 });
 
 
-app.service('FakeService', function ($window) {
+app.service('FakeService', function($window) {
   this.faker = $window.faker;
 });
